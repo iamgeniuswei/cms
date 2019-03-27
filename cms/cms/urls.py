@@ -25,5 +25,6 @@ urlpatterns = [
     # url(r'^$', view.hello),
     path('hello/', view.hello),
     url(r'^testdb$', testdb.testdb),
+    url(r'^onlyoffice$', view.test_onlyoffice),
     
 ]
