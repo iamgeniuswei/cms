@@ -5,10 +5,23 @@ import json
 # 为了直接访问附件文件配置
 from django.views.static import serve
 from django.conf import settings
+
+# 访问数据库中所有待编辑的文件
+from model.models import OfficeFile
+
+
 def hello(request):
     context = {}
     context['hello'] = 'Hello World'
     return render(request, 'hello.html', context)
+
+def test_file_list(request):
+    origin = OfficeFile.objects.all()
+    list = []
+    for item in origin:
+        list.append(item)
+    return render(request, 'list.html', {'list':list})
+
 
 
 def test_onlyoffice(request):
@@ -25,7 +38,8 @@ def upload(request):
             if code == 2:
                 url = status['url']
                 f = requests.get(url)
-                with open("1.docx", "wb") as code:
+                path = os.path.join(settings.MEDIA_ROOT, "url-to-example-document.docx")
+                with open(path, "wb") as code:
                     code.write(f.content)
 
         except Exception as e:

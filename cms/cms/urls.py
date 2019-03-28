@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^testdb$', testdb.testdb),
     url(r'^onlyoffice$', view.test_onlyoffice),
     path('upload/', view.upload),
+    url(r'^list$', view.test_file_list),
     url(r'attachment/(?P<path>.*)', serve, {'document_root':settings.MEDIA_ROOT}),
     
 ]
